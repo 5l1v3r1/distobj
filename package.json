@@ -2,11 +2,12 @@
   "name": "distobj",
   "description": "a basic system for distributed objects in Node.js",
   "author": "Alex Nichol <unixpickle@gmail.com>",
+  "repository": "https://github.com/unixpickle/distobj",
   "dependencies": {
     "eventemitter2": "0.4.x",
     "coffee-script": "1.6.x"
   },
-  "version": "0.0.2",
+  "version": "0.0.3",
   "licenses": [{
     "type": "GPL",
     "url": "http://www.gnu.org/licenses/gpl.html"
