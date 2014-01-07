@@ -23,3 +23,6 @@ class SendableError
 
 class Emitter extends EventEmitter2
   emit: (type, args...) -> super type, fixObject(args)...
+
+exports.Emitter = Emitter
+exports.SendableError = SendableError
