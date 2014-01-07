@@ -12,17 +12,17 @@ class JSONStream extends EventEmitter
     buffer = new Buffer('')
     @cbFunc = (d) =>
       buffer = Buffer.concat [buffer, d]
-      if buffer.length >= 4
+      while buffer.length >= 4
         if isNaN len = parseInt buffer[0...4], 16
           return @emit 'error', new Error 'invalid length field'
-        if len + 4 <= buffer.length
-          packet = buffer[4...len + 4]
-          buffer = buffer[len + 4..]
-          try
-            parsedPacket = JSON.parse packet
-          catch e
-            @emit 'error', e
-          @emit 'packet', parsedPacket
+        break if len + 4 > buffer.length
+        packet = buffer[4...len + 4]
+        buffer = buffer[len + 4..]
+        try
+          parsedPacket = JSON.parse packet
+        catch e
+          @emit 'error', e
+        @emit 'packet', parsedPacket
     @socket.on 'data', @cbFunc
   
   send: (packet) ->

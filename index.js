@@ -9,6 +9,6 @@ function mixin(dict, exp) {
 
 module.exports = {}
 module.exports.JSONStream = require('./lib/jsonstream');
-mixin(require('./lib/client'), module.exports);
-mixin(require('./lib/server'), module.exports);
+module.exports.Client = require('./lib/client');
+module.exports.Server = require('./lib/server');
 mixin(require('./lib/emitter'), module.exports);

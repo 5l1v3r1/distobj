@@ -24,5 +24,14 @@ class SendableError
 class Emitter extends EventEmitter2
   emit: (type, args...) -> super type, fixObject(args)...
 
+  # returns all method names from subclass
+  getMethodNames: ->
+    list = []
+    for m of this
+      continue if typeof this[m] isnt 'function'
+      continue if Emitter.prototype[m]?
+      list.push m
+    return list
+
 exports.Emitter = Emitter
 exports.SendableError = SendableError

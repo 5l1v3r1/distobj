@@ -28,10 +28,7 @@ class Server extends EventEmitter2
       return if (index = @streams.indexOf stream) < 0
       @streams.splice index, 1
     # send a list of methods as the first object
-    methods = []
-    for key of @emitter
-      methods.push key if typeof @emitter[key] is 'function'
-    stream.send methods
+    stream.send @emitter.getMethodNames()
   
   _sendEvent: (event, args) ->
     obj = event: event, args: args
@@ -42,6 +39,6 @@ class Server extends EventEmitter2
     throw new Error 'invalid packet' if typeof obj isnt 'object'
     throw new Error 'invalid packet' if not obj.args instanceof Array
     throw new Error 'invalid packet' if typeof obj.command isnt 'string'
-    for x in obj.args
-      throw new Error 'invalid packet' if typeof x isnt 'string'
     @emitter[obj.command].apply @emitter, obj.args
+
+module.exports = Server
