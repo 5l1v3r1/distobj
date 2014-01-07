@@ -9,7 +9,7 @@ class Server extends EventEmitter2
     @socket.on 'connection', (conn) => @_gotConnection conn
     
     ref = this
-    @emitter.onAny, (args...) -> ref._sendEvent this.event, args
+    @emitter.onAny (args...) -> ref._sendEvent this.event, args
   
   _gotConnection: (conn) ->
     address = conn.address()
