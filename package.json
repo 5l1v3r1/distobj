@@ -6,7 +6,7 @@
     "eventemitter2": "0.4.x",
     "coffee-script": "1.6.x"
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "licenses": [{
     "type": "GPL",
     "url": "http://www.gnu.org/licenses/gpl.html"
