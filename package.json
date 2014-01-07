@@ -1,6 +1,6 @@
 {
-  "name": "ircnode",
-  "description": "a scalable IRC connection manager",
+  "name": "distobj",
+  "description": "a basic system for distributed objects in Node.js",
   "author": "Alex Nichol <unixpickle@gmail.com>",
   "dependencies": {
     "eventemitter2": "0.4.x",
