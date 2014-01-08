@@ -1,6 +1,7 @@
 {EventEmitter2} = require 'eventemitter2'
 
 fixObject = (obj) ->
+  return null if obj is null
   return obj if typeof obj == 'string'
   return obj if typeof obj == 'number'
   return obj.toString() if typeof obj == 'function'
