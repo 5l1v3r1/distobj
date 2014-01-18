@@ -29,6 +29,7 @@ class Emitter extends EventEmitter2
   getMethodNames: ->
     list = []
     for m of this
+      continue if m[0] is '_'
       continue if typeof this[m] isnt 'function'
       continue if Emitter.prototype[m]?
       list.push m
