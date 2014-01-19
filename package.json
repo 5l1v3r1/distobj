@@ -13,7 +13,7 @@
     "eventemitter2": "0.4.x",
     "coffee-script": "1.6.x"
   },
-  "version": "0.0.5",
+  "version": "0.0.6",
   "licenses": [
     {
       "type": "GPL",
