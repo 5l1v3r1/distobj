@@ -27,6 +27,7 @@ class Server extends EventEmitter2
       @emit 'close', address
       return if (index = @streams.indexOf stream) < 0
       @streams.splice index, 1
+    conn.on 'error', ->
     # send a list of methods as the first object
     stream.send @emitter.getMethodNames()
   

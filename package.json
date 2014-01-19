@@ -1,19 +1,35 @@
 {
   "name": "distobj",
   "description": "a basic system for distributed objects in Node.js",
-  "author": "Alex Nichol <unixpickle@gmail.com>",
-  "repository": "https://github.com/unixpickle/distobj",
+  "author": {
+    "name": "Alex Nichol",
+    "email": "unixpickle@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unixpickle/distobj"
+  },
   "dependencies": {
     "eventemitter2": "0.4.x",
     "coffee-script": "1.6.x"
   },
-  "version": "0.0.4",
-  "licenses": [{
-    "type": "GPL",
-    "url": "http://www.gnu.org/licenses/gpl.html"
-  }],
+  "version": "0.0.5",
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://www.gnu.org/licenses/gpl.html"
+    }
+  ],
   "engines": {
     "node": "0.10.x"
   },
-  "main": "index.js"
+  "main": "index.js",
+  "readme": "# Distributed Objects in Node.js\n\n`distobj` provides a basic facility for accessing remote `EventEmitter`s over the network in Node.js. Internally, `distobj` uses JSON to encode arguments you pass, and to encode responses (which come in the form of events). Since Node.js is totally event based, `distobj` has no concept of *return values*.\n\n# Usage\n\nYou can create and publish an object as follows in this CoffeeScript example:\n\n    {Emitter, Server} = require 'distobj'\n    net = require 'net'\n\n    # simply subclass the Emitter class\n    class TestObject extends Emitter\n      print: (data) ->\n        console.log data\n        # events we emit are broadcasted\n        @emit 'echo', data\n      add: (a, b) ->\n        @emit 'sum', a + b\n    \n    # create a new TestObject.\n    object = new TestObject()\n    # create a server with object on port 1337.\n    server = net.createServer()\n    realObj = new Server server, object\n    server.listen 1337\n\nTo access that object from a different process, do this:\n\n    {Client} = require 'distobj'\n    net = require 'net'\n    # create a connection\n    socket = net.connect port: 1337, ->\n      # create a client and await a callback\n      c = new Client socket, ->\n        # upon receiving this callback, the client is now configured\n        # with all of the methods on the remote object\n        c.add 10, 20\n        c.print 'hey there'\n      # treat c like a normal event emitter\n      c.on 'sum', (n) ->\n        console.log 'got sum: ' + n\n      c.on 'echo', (d) ->\n        console.log 'got echo: ' + d\n\nAs you can see, `distobj` makes it almost *too easy* to access objects over the network!\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/unixpickle/distobj/issues"
+  },
+  "homepage": "https://github.com/unixpickle/distobj",
+  "_id": "distobj@0.0.5",
+  "_from": "distobj@0.0.x"
 }
